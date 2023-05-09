@@ -6,6 +6,7 @@ const cors = require('cors');
 const userRoutes = require('./routes/users');
 const businessRoutes = require('./routes/businesses');
 
+
 const app = express();
 const port = process.env.PORT || 3000;
 
