@@ -5,6 +5,8 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/users');
 const businessRoutes = require('./routes/businesses');
+const reviewRoutes = require('./routes/reviews');
+
 
 
 const app = express();
@@ -22,6 +24,8 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use('/api/users', userRoutes);
 app.use('/api/businesses', businessRoutes);
+app.use('/api/reviews', reviewRoutes);
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
