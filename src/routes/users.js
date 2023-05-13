@@ -13,7 +13,7 @@ const router = express.Router();
 
 router.post('/register', async (req, res) => {
   try {
-    const { name, email, password, walletAddress } = req.body;
+    const { name, email, password, walletAddress, privateKey } = req.body;
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const newUser = new User({ name, email, password: hashedPassword, walletAddress });
+    const newUser = new User({ name, email, password: hashedPassword, walletAddress, privateKey });
     await newUser.save();
 
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
